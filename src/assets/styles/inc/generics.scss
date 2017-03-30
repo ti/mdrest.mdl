@@ -1,0 +1,104 @@
+body{
+    scroll-behavior: smooth;
+}
+.m-lr-2 {
+    margin: 0 2px;
+}
+
+.p-16 {
+    padding: 16px;
+}
+
+.menu-separator {
+    height: 1px;
+    background-color: #dcdcdc;
+    margin: 0;
+}
+
+.mdl-menu__item> i{
+    font-size: 18px;
+    margin-right: 16px;
+    vertical-align: middle;
+    max-width: 24px;
+}
+
+#content>.info{
+    background-color: #00b0ff;
+    padding: 30px 50px;
+    color: white;
+}
+
+#content .error{
+    max-width: 400px;
+    padding: 50px;
+    background-color:rgba(200,200,200,.7);
+    border-radius: 3px;
+    color: white;
+    width: 90%;
+    margin-left: 50%;
+    margin-right: -50%;
+    text-align: center;
+    transform: translate(-50%, 10%);
+
+    &>i {
+        color: rgb(229,57,53);
+        font-size: 90px;
+        font-family: 'Material Icons';
+        font-style: normal;
+        line-height: 1;
+        text-transform: none;
+        display: inline-block;
+    }
+}
+/*----------------------------------
+    Avatar with text simple style
+-----------------------------------*/
+
+.avatar {
+    display: inline-block;
+    background-clip: content-box;
+    box-sizing: border-box;
+    color: #fff;
+    text-align: center;
+    vertical-align: middle;
+    background-size: cover;
+    align-items: center !important;
+    font-weight: 400;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    font-size: 20px;
+    line-height: 44px;
+    background-color: #F5F5F5;
+    cursor: pointer;
+    border: 0;
+
+    &.large {
+        width: 156px;
+        height: 156px;
+        line-height: 156px;
+        font-size: 76px;
+        background-size: cover;
+        background-color: #F5F5F5;
+        border: 2px solid rgba(255, 255, 255, .6);
+    }
+
+    &.small {
+        width: 30px;
+        height: 30px;
+        font-size: 16px;
+        line-height: 30px;
+    }
+}
+
+/*----------------------------------
+    Simple IE-WARNING
+-----------------------------------*/
+.ie-warning {
+    z-index:100;
+    position: absolute;
+    background: #fb8c00;
+    top: 0;
+    left: 0;
+    color: white;
+}

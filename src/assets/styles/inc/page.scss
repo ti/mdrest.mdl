@@ -1,0 +1,19 @@
+#content {
+  min-height: calc(100vh - 176px);
+}
+
+footer {
+  height: 120px;
+  padding: 40px;
+  align-items: center;
+  background-color: white !important;
+  box-sizing: border-box;
+
+  a {
+    color: #666;
+  }
+
+  .mdl-mini-footer--right-section {
+    margin-right: 40px;
+  }
+}
