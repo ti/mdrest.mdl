@@ -1,0 +1,11 @@
+{
+  "Watch": false,
+  "BasePath": "/",
+  "SrcDir": "/Users/leenanxi/WebstormProjects/mdrest.theme/dist",
+  "OutputType": "json",
+  "SiteMapDeep": 2,
+  "DistDir": "",
+  "NoLogging": false,
+  "NoIndex": false,
+  "NoSiteMap": false
+}
