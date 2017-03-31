@@ -6,6 +6,7 @@ var App = (function () {
     var content = document.getElementById("content");
     var link = document.getElementById("link");
     var drawerToggle = document.getElementById("drawer-toggle");
+    var hasHistoy = false;
 
     var getBaseUrl = function () {
         var url = window.location.pathname;
@@ -99,7 +100,11 @@ var App = (function () {
             }
         };
         document.getElementById("back-button").onclick = function () {
-            window.history.back();
+            if(hasHistoy){
+                window.history.back();
+            } else {
+                App.routes.goto("/")
+            }
         };
         document.querySelector(".drawer").onclick = function () {
             if(drawerToggle.checked){
@@ -411,7 +416,10 @@ var App = (function () {
             }
             document.title = route.title;
             header.scrollIntoView();
-            window.history.pushState(state,route.title, window.location.pathname + state);
+            if (state !== window.location.hash) {
+                window.history.pushState(state,route.title, window.location.pathname + state);
+                hasHistoy = true
+            }
             //clear header
             require.require(route.template,"html",function (tpl,err) {
                if(err) {
@@ -464,8 +472,8 @@ var App = (function () {
         App.routes.add("/",MdRestConfig.Title,"assets/views/blog.html","-child-page -mdl-blog--blogpost",Blog.getSummary);
         App.routes.add("/pages",MdRestConfig.Title,"assets/views/blog.html","-child-page -mdl-blog--blogpost",Blog.getSummary);
         App.routes.add("/page",MdRestConfig.Title,"assets/views/page.html","child-page mdl-blog--blogpost",Blog.getPage);
-        App.routes.add("/about","关于","assets/views/about.html","child-page mdl-blog--blogpost",Blog.getPage);
-        App.routes.add("/tags","标签","assets/views/tags.html","child-page mdl-blog--blogpost", Blog.getTags);
+        App.routes.add("/about","关于","assets/views/about.html","-child-page mdl-blog--blogpost",Blog.getPage);
+        App.routes.add("/tags","标签","assets/views/tags.html","-child-page mdl-blog--blogpost", Blog.getTags);
         App.routes.add("/tag","标签","assets/views/tag.html","child-page mdl-blog--blogpost", Blog.getSummaryByTags);
         App.routes.add("/simple","博客","assets/views/simple.html","child-page mdl-blog--blogpost");
         App.routes.add("/catalog","分类","assets/views/catalog.html","-child-page -mdl-blog--blogpost",Blog.getSummaryByCatalog);

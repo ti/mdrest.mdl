@@ -1,0 +1,65 @@
+[
+  {
+    "title": "开发者流程",
+    "location": "开发者流程"
+  },
+  {
+    "title": "README",
+    "location": "readme"
+  },
+  {
+    "title": "快速入门",
+    "location": "快速入门"
+  },
+  {
+    "title": "Oauth 2.0",
+    "location": "oauth 2.0"
+  },
+  {
+    "title": "api 接入手册",
+    "children": [
+      {
+        "title": "用户接入",
+        "location": "api 接入手册/用户接入"
+      },
+      {
+        "title": "服务器端授权",
+        "location": "api 接入手册/服务器端授权"
+      }
+    ]
+  },
+  {
+    "title": "api 资源列表",
+    "children": [
+      {
+        "title": "学校内部调用",
+        "location": "api 资源列表/学校内部调用"
+      },
+      {
+        "title": "获取用户数据",
+        "location": "api 资源列表/获取用户数据"
+      },
+      {
+        "title": "获取公有数据",
+        "location": "api 资源列表/获取公有数据"
+      }
+    ]
+  },
+  {
+    "title": "其他",
+    "children": [
+      {
+        "title": "帮助和反馈",
+        "location": "其他/帮助和反馈"
+      },
+      {
+        "title": "使用条款",
+        "location": "其他/使用条款"
+      },
+      {
+        "title": "SDK下载",
+        "location": "其他/sdk下载"
+      }
+    ]
+  }
+]

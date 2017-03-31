@@ -209,6 +209,11 @@
   .mdl-blog__posts > .mdl-card.something-else {
     order: -1;
   }
+
+  .mdl-blog__page .mdl-card__supporting-text {
+    padding-top: 0;
+  }
+
   .mdl-blog {
     &.mdl-layout .mdl-layout__content {
       padding: 0;
@@ -216,6 +221,9 @@
     }
     .mdl-card.something-else {
       min-height: 260px;
+    }
+    .mdl-card__supporting-text .docs {
+      margin: 0 auto;
     }
   }
   .mdl-blog--blogpost .mdl-blog__posts > .mdl-card .mdl-card__media {
