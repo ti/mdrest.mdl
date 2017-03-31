@@ -461,9 +461,9 @@ var App = (function () {
     };
 
     var toggleRoutes = function () {
-        App.routes.add("/","南希的博客","assets/views/blog.html","-child-page -mdl-blog--blogpost",Blog.getSummary);
-        App.routes.add("/pages","南希的博客","assets/views/blog.html","-child-page -mdl-blog--blogpost",Blog.getSummary);
-        App.routes.add("/page","南希的博客","assets/views/page.html","child-page mdl-blog--blogpost",Blog.getPage);
+        App.routes.add("/",MdRestConfig.Title,"assets/views/blog.html","-child-page -mdl-blog--blogpost",Blog.getSummary);
+        App.routes.add("/pages",MdRestConfig.Title,"assets/views/blog.html","-child-page -mdl-blog--blogpost",Blog.getSummary);
+        App.routes.add("/page",MdRestConfig.Title,"assets/views/page.html","child-page mdl-blog--blogpost",Blog.getPage);
         App.routes.add("/about","关于","assets/views/about.html","child-page mdl-blog--blogpost",Blog.getPage);
         App.routes.add("/tags","标签","assets/views/tags.html","child-page mdl-blog--blogpost", Blog.getTags);
         App.routes.add("/tag","标签","assets/views/tag.html","child-page mdl-blog--blogpost", Blog.getSummaryByTags);

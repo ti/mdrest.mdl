@@ -88,7 +88,9 @@ var AppSearch = (function () {
             if (data_title != '' && data_content != '') {
                 keywords.forEach(function (keyword, i) {
                     index_title = data_title.indexOf(keyword);
-                    index_tags =  data_tags.indexOf(keyword);
+                    if(data_tags){
+                        index_tags =  data_tags.indexOf(keyword);
+                    }
                     if(index_tags < 0) {
                         index_content = data_content.indexOf(keyword);
                     } else {
