@@ -56,7 +56,7 @@ var Blog = (function () {
                     data[i].isFirst = true;
                 }
                 if ("http" !==  data[i].location.substring(0, 4)) {
-                    data[i].location = "/page/" + data[i].location;
+                    data[i].href = "/page/" + data[i].location;
                 }
                 data[i]._fininshed = true;
             }
@@ -132,7 +132,7 @@ var Blog = (function () {
                 }
                 data[i].date_local = moment((new Date(data[i].date))).fromNow()
                 if ("http" !==  data[i].location.substring(0, 4)) {
-                    data[i].location = "/page/" + data[i].location;
+                    data[i].href = "/page/" + data[i].location;
                 }
                 data[i]._fininshed = true;
             }
@@ -214,7 +214,7 @@ var Blog = (function () {
                     data[i].isFirst = true;
                 }
                 if ("http" !==  data[i].location.substring(0, 4)) {
-                    data[i].location = "/page/" + data[i].location;
+                    data[i].href = "/page/" + data[i].location;
                 }
                 data[i]._fininshed = true;
             }
@@ -254,7 +254,7 @@ var Blog = (function () {
                         }
                         tagsData[tag[j]].push({
                             title:data[i].title,
-                            href:data[i].location
+                            href: "/page/" + data[i].location
                         })
                     }
                 }

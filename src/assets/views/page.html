@@ -1,4 +1,4 @@
-<div class="mdl-blog__posts mdl-grid">
+<div class="mdl-blog__posts mdl-blog__page mdl-grid">
     <div class="mdl-card mdl-shadow--4dp mdl-cell mdl-cell--12-col">
         <div class="mdl-card__media mdl-color-text--grey-50"  style="{{#picture}}background-image:url('{{picture}}');{{/picture}} {{#picture_color}}background-color:{{picture_color}}{{/picture_color}}">
             <h3>{{title}}</h3>
@@ -10,7 +10,7 @@
                 <span>{{date_local}}</span>
             </div>
             <div class="section-spacer"></div>
-            <div class="tags">
+            <div class="tags visible-s">
                 {{#tags}}
                 <a data-link href="/tag/{{.}}" class="mdl-chip"><span class="mdl-chip__text">{{.}}</span></a>
                 {{/tags}}
@@ -44,11 +44,6 @@
         </div>
 
         <div class="mdl-color-text--grey-700 mdl-card__supporting-text">
-            <div class="tags visible-xs">
-                {{#tags}}
-                <a data-link href="/tag/{{.}}" class="mdl-chip"><span class="mdl-chip__text">{{.}}</span></a>
-                {{/tags}}
-            </div>
             <div class="docs">
                 {{{html}}}
             </div>
