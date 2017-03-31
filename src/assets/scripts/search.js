@@ -62,7 +62,7 @@ var AppSearch = (function () {
         var resultUl = resultContent.firstElementChild;
         if (input.value.trim().length <= 0) {
             defaultResult.forEach(function (data) {
-                var resultLi = "<li data-link href='" + data.location + "'><div>" + data.title + "</div>" + "<small>" + data.text + "...</small></li>";
+                var resultLi = "<li data-link href='/page/" + data.location + "'><div>" + data.title + "</div>" + "<small>" + data.text + "...</small></li>";
                 resultUl.insertAdjacentHTML('beforeend', resultLi);
             });
             resultContent.toggleInternalLink();
@@ -115,7 +115,7 @@ var AppSearch = (function () {
                     return
                 }
                 resultLen ++;
-                var resultLi = "<li data-link href='" + data_url + "'><div>" + data.title + "</div>";
+                var resultLi = "<li data-link href='/page/" + data_url + "'><div>" + data.title + "</div>";
                 if (first_occur >= 0) {
                     // cut out characters
                     var start = first_occur - 6;
@@ -160,7 +160,10 @@ document.addEventListener("DOMContentLoaded", function() {
         this.querySelector("input").focus();
         AppSearch.init(MdRestConfig.BasePath + "mdrest_search_index.json",undefined,"search-field","search-result");
     };
-    box.querySelector("input").onblur = function () {
-        box.classList.remove("is-focused")
-    };
+    document.onclick = function (e) {
+        if(e.target.id !== "search-field"){
+            box.classList.remove("is-focused")
+        }
+    }
+
 });
