@@ -124,7 +124,7 @@ var Oauth = (function () {
 
 
     function init() {
-            if(!handleUserInfo()){
+            if(MdRestConfig.LoginAble && !handleUserInfo()){
                 showLoginButton()
             }
     }

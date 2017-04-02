@@ -5,5 +5,6 @@ var MdRestConfig = {
     Title:"李思晴的博客",
     Slogan:"晴朗的一天",
     AboutPage:"关于/我",
+    LoginAble:true,
     Disqus:"lnxc"
 };

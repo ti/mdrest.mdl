@@ -20,22 +20,30 @@
         }
         #page-loading {
             z-index: 99;
+            width: 100%;
+            height: 100%;
+            left: 0;
+            background-color: rgba(0, 0, 0, 0.3);
+            text-align: center;
+            position: fixed;
+        }
+        .loading_spinner {
             position: absolute;
+            top: 40%;
+            left: 50%;
             width: 30px;
             height: 30px;
-            top: 50%;
-            left: 50%;
-            margin: -60px 0 0 -15px;
             box-sizing: border-box;
-            display: inline-block;
             border-radius: 50%;
-            box-shadow: 0 -10px 0 13px rgba(255, 255, 255, 0.3) inset;
+            box-shadow: 0 -10px 0 13px rgba(255, 255, 255, 0.6) inset;
             animation: rotate 1s infinite linear;
         }
     </style>
 </head>
 <body>
-<div id="page-loading"></div>
+<div id="page-loading">
+    <div class="loading_spinner"></div>
+</div>
 <!--[if lt IE 9]><p class="ie-warning">您的浏览器版本太低，为了提高您的使用体验，请 <a href="http://browsehappy.com/">点击这里</a> 升级浏览器</p>
 <![endif]-->
 <div id="main" class="mdl-blog mdl-layout mdl-js-layout  mdl-layout--fixed-header">

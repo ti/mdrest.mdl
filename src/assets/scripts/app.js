@@ -20,7 +20,7 @@ var App = (function () {
     };
 
     var loading = {
-        isDone: false,
+        isDone: true,
         dom: document.getElementById("page-loading"),
         done: function () {
             loading.isDone = true;
@@ -32,7 +32,7 @@ var App = (function () {
                 if(!loading.isDone){
                     loading.dom.style.display = "block";
                 }
-            },1000);
+            },1200);
         }
     };
 
@@ -286,9 +286,9 @@ var App = (function () {
             require.data[key] = value;
         },
         require:function (url,type, callback) {
+            //如果正在载入，return
             if("link" === type || "script" === type){
                 var status = require.data[url];
-
                 if(undefined != status){
                     if(200 ===status){
                         return callback();
