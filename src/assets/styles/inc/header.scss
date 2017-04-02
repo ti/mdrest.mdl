@@ -106,6 +106,10 @@
   display: none;
 }
 
+.mdl-layout__drawer .mdl-navigation {
+  padding-top: 0;
+}
+
 #drawer-toggle-label {
   user-select: none;
   height:32px;
@@ -286,15 +290,12 @@
   .trans-drawer {
     display: none;
   }
-  .trans-header .mdl-layout__drawer-button {
-    display: none !important;
-  }
 }
 
 .trans-drawer-separator {
   height: 1px;
   background-color: #dcdcdc;
-  margin: 8px 0;
+  margin: 4px 0;
 }
 
 .trans-header .mdl-menu__container {
@@ -326,10 +327,6 @@
   color: rgba(255, 255, 255, 0.96) !important;
 }
 
-.trans-header .mdl-layout__drawer-button {
-  background: transparent;
-  color: rgba(255, 255, 255, 0.96);
-}
 
 .trans-header .mdl-navigation__link {
   color: rgba(255, 255, 255, 0.96);
@@ -407,10 +404,6 @@
 
 
 
-.trans-header .mdl-layout__drawer-button {
-  display: none !important;
-}
-
 /**** Mobile layout ****/
 @media (max-width: 900px) {
 
@@ -426,9 +419,6 @@
 
   .trans-drawer {
     display: block;
-  }
-  .trans-header .mdl-layout__drawer-button {
-    display: block !important;
   }
 
   .trans-mobile-title {
