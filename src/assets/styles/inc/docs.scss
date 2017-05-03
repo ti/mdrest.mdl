@@ -1,3 +1,40 @@
+html, body {
+  font-family: $preferred_font;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+}
+
+p {
+  @include typo-body-1;
+  margin: 16px 0;
+}
+
+
+/**
+* Styles for HTML elements
+*/
+
+h1 small, h2 small, h3 small, h4 small, h5 small, h6 small {
+  @include typo-display-3($colorContrast: true);
+  font-size: 0.6em;
+}
+
+
+a {
+  color: $text-link-color;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+
+
+ul, ol {
+  @include typo-body-1;
+}
+
+
+
 .docs {
   background: #fff;
   font-size: 14px;
@@ -10,17 +47,22 @@
 
 h1, h2, h3, h4, h5, h6 {
   position: relative;
-  margin-top: 1rem;
-  margin-bottom: 1rem;
+  margin: 1rem 0;
   line-height: 1.4;
   cursor: text;
+
 }
 
+
 h1 {
+  font-weight: 400;
+  letter-spacing: -0.02em;
   padding-bottom: .3em;
   font-size: 2.25em;
   line-height: 1.2;
   border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  margin: 24px 0;
+
 }
 
 h2 {
@@ -29,26 +71,41 @@ h2 {
   color: #00BCD4;
   line-height: 1.225;
   border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  font-weight: 400;
+  margin: 24px 0;
 }
 
 h3 {
   font-size: 1.5em;
   line-height: 1.43;
+  font-weight: 400;
+  margin: 24px 0;
+
 }
 
 h4 {
   font-size: 1.25em;
   display: flex;
   align-items: center;
+  margin-top: 24px;
+  margin-bottom: 16px;
 }
 
 h5 {
   font-size: 1em;
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: 0.02em;
 }
 
 h6 {
   font-size: 1em;
   color: #777;
+  margin-top: 24px;
+  margin-bottom: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  letter-spacing: 0.04em;
 }
 
 .docs {
@@ -97,9 +154,6 @@ h6 {
 }
 
 
-a {
-  text-decoration: none;
-}
 code {
   font-size: 13px;
   color: #263238;
@@ -195,24 +249,11 @@ pre[class*="language-"]::before {
   padding: 3px 6px;
 }
 
-
-
 blockquote {
-  padding: 20px 16px 6px 16px;
+  padding: 5px 16px;
   border-left: 4px solid rgba(0, 0, 0, .08);
   background-color: rgba(0, 0, 0, .03);
   margin: 0;
-}
-
-blockquote:before {
-  position: absolute;
-  left: 0;
-  content: '';
-}
-
-blockquote:after {
-  content: '';
-  margin-left: 0;
 }
 
 .docs {

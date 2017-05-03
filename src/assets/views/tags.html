@@ -1,14 +1,14 @@
 <div class="mdl-blog__posts mdl-grid">
     <div class="mdl-card mdl-shadow--4dp mdl-cell mdl-cell--12-col">
         <div class="mdl-card__media mdl-color-text--grey-50"
-             style="background-image: url('assets/images/header.jpg')">
+             style="background-image: url('assets/images/header.png')">
             <h3>标签，记录日志的点点滴滴</h3>
         </div>
         <div class="mdl-color-text--grey-700 mdl-card__supporting-text">
             <div class="docs">
                 <div class="tags">
                     {{#tags}}
-                    <a href="#{{.}}" data-link class="mdl-chip"><span class="mdl-chip__text">{{.}}</span></a>
+                    <a href="#{{.}}" class="mdl-chip"><span class="mdl-chip__text">{{.}}</span></a>
                     {{/tags}}
                 </div>
                 {{#pages}}

@@ -42,7 +42,7 @@ gulp.task('sass', function () {
         .pipe(connect.reload());
 });
 
-gulp.task('cacheViews', function () {
+gulp.task('viewsCache', function () {
     var options = {
         root:"assets/views/",
         templateHeader:" ",
@@ -97,6 +97,12 @@ gulp.task('images', function () {
         .pipe(gulp.dest(paths.dist));
 });
 
+
+gulp.task('mdimages', function () {
+    gulp.src("dist/**/*.png")
+        .pipe(imagemin())
+        .pipe(gulp.dest("dist"));
+});
 
 gulp.task('connectDev', function () {
     connect.server({

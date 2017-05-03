@@ -361,7 +361,7 @@ var App = (function () {
 
     var routes = {
         data: {
-            "_error":'<div class="error"><i>info</i><h3>{{status}}</h3><p>{{msg}}</p></div>'
+            "_error":'<div class="error"><i class="material-icons">info</i><h3>{{status}}</h3><p>{{msg}}</p></div>'
         },
         remove: function (url) {
             delete this.data[url];
@@ -385,10 +385,10 @@ var App = (function () {
 
         },
         goto: function (url) {
-            loading.start();
             if(url === undefined || this.data.currentUrl === url){
                 return
             }
+            loading.start();
             var curActive = header.querySelector("a.active");
             if (curActive) {
                 curActive.classList.remove("active")
