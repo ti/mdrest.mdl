@@ -1,0 +1,1 @@
+mdrest/mdrest -c mdrest/config.json

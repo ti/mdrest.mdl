@@ -7,6 +7,10 @@
   }
 }
 
+.mdl-typography--text-uppercase {
+  text-transform: uppercase;
+}
+
 @media (min-width: 768px) {
   .visible-xs {
     display: none !important;

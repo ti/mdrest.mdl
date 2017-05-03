@@ -1,11 +1,13 @@
 {
   "Watch": false,
-  "BasePath": "/",
-  "SrcDir": "/Users/leenanxi/WebstormProjects/mdrest.theme/dist",
+  "Server":true,
+  "BasePath": "",
+  "SrcDir": "dist",
   "OutputType": "json",
   "SiteMapDeep": 2,
   "DistDir": "",
   "NoLogging": false,
   "NoIndex": false,
-  "NoSiteMap": false
+  "NoSiteMap": false,
+  "ServerAddr":":9527"
 }
