@@ -37,7 +37,7 @@ var App = (function () {
     };
 
     var scrollIntoViewSmoothly = function (element) {
-        element.scrollIntoView({"behavior": "smooth"});
+        element.scrollIntoView({behavior: "smooth", block: "start", inline: "nearest"});
     };
     var baseActions = function () {
         HTMLDivElement.prototype.toggleInternalLink = function () {
