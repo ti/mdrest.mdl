@@ -1,9 +1,9 @@
 'use strict';
 var Oauth = (function () {
     var clientId = "accounts.sso";
-    var authorizeUrl = "https://accounts.tiup.cn/oauth2/authorize";
-    var userInfoUrl = "https://accounts.tiup.cn/apis/oauth2/v1/userinfo";
-    var accountMgrUrl = "https://accounts.tiup.cn";
+    var authorizeUrl = "https://account.nx.run/v5/oauth/authorize";
+    var userInfoUrl = "https://account.nx.run/apis/apis/v5/user/userinfo";
+    var accountMgrUrl = "https://account.nx.run";
     var cookieName = "access_token";
     var queryString = function (query) {
         var result = {};
@@ -50,8 +50,8 @@ var Oauth = (function () {
                 email.classList.remove("hidden")
             }
             element.querySelectorAll(".avatar").forEach(function (avatar) {
-                if(userinfo.avatarurl) {
-                    avatar.style.backgroundImage = "url("+ userinfo.avatarurl + ")"
+                if(userinfo.avatar_url) {
+                    avatar.style.backgroundImage = "url("+ userinfo.avatar_url + ")"
                 }else {
                     avatar.style.backgroundColor = App.nameColors.get(userinfo.name)
                     avatar.innerText = userinfo.name.substr(0,1)
@@ -91,19 +91,18 @@ var Oauth = (function () {
                     }
                     var userInfo = {
                         name: data.name,
-                        avatarurl:data.avatarurl,
                         email:data.email
                     };
 
-                     if("http" !== data.avatarurl.substr(0,4)){
-                         userInfo.avatarurl = accountMgrUrl + data.avatarurl;
-                     }
+                    if ((data.avatar_url !== undefined) &&  ("http" !== data.avatar_url.substr(0,4))) {
+                        userinfo.avatar_url = accountMgrUrl + data.avatar_url;
+                    }
+                     
                     if(!userInfo.email){
                         userInfo.email = "未设置邮箱"
                     }
                     localStorage.setItem("userinfo", JSON.stringify(userInfo));
                     window.history.pushState("", document.title, window.location.pathname);
-
                     updateUserInfoDoms(userInfo)
                     return true
 
