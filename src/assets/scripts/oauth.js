@@ -38,7 +38,7 @@ var Oauth = (function () {
     function logout() {
         localStorage.removeItem("userinfo");
         localStorage.removeItem("token");
-        window.location.replace(accountMgrUrl+ "/auth/logout?redirect_uri=" + encodeURI(window.location.href))
+        window.location.replace(accountMgrUrl+ "/v5/oauth/logout?redirect_uri=" + encodeURI(window.location.href))
     }
 
     function updateUserInfoDoms(userinfo) {
