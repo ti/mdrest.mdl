@@ -1,5 +1,10 @@
 # Front HTML SOURCE
 
+![main page](_captures/captures_1.png)
+
+![artical page](_captures/captures_2.png)
+
+
 ### Build
 Use Gulp and Bower
 
