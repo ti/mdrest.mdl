@@ -45,7 +45,7 @@ var Blog = (function () {
                 data[i].picture_color = App.nameColors.get(data[i].title)
                 if (!data[i].author) {
                     data[i].author = MdRestConfig.Author;
-                    data[i].author_avatar = "/assets/images/avatar.png";
+                    data[i].author_avatar = "assets/images/avatar.png";
                 }
                 data[i].author_avatar_color = App.nameColors.get(data[i].author)
                 if (!data[i].author_avatar) {
@@ -124,7 +124,7 @@ var Blog = (function () {
                 data[i].picture_color = App.nameColors.get(data[i].title)
                 if (!data[i].author) {
                     data[i].author = MdRestConfig.Author;
-                    data[i].author_avatar = "/assets/images/avatar.png";
+                    data[i].author_avatar = "assets/images/avatar.png";
                 }
                 data[i].author_avatar_color = App.nameColors.get(data[i].author)
                 if (!data[i].author_avatar) {
@@ -203,7 +203,7 @@ var Blog = (function () {
                 data[i].picture_color = App.nameColors.get(data[i].title)
                 if (!data[i].author) {
                     data[i].author = MdRestConfig.Author;
-                    data[i].author_avatar = "/assets/images/avatar.png";
+                    data[i].author_avatar = "assets/images/avatar.png";
                 }
                 data[i].author_avatar_color = App.nameColors.get(data[i].author)
                 if (!data[i].author_avatar) {
@@ -286,7 +286,7 @@ var Blog = (function () {
             data.picture_color = App.nameColors.get(data.title)
             if (!data.author) {
                 data.author = MdRestConfig.Author;
-                data.author_avatar = "/assets/images/avatar.png";
+                data.author_avatar = "assets/images/avatar.png";
             }
             data.author_avatar_color = App.nameColors.get(data.author);
             if (!data.author_avatar) {
