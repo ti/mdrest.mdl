@@ -1,9 +1,9 @@
 'use strict';
 var Oauth = (function () {
-    var clientId = "accounts.sso";
-    var authorizeUrl = "https://account.nx.run/v5/oauth/authorize";
-    var userInfoUrl = "https://account.nx.run/apis/apis/v5/user/userinfo";
-    var accountMgrUrl = "https://account.nx.run";
+    var clientId = "9527";
+    var authorizeUrl = "https://account.nanxi.li/v5/oauth/authorize";
+    var userInfoUrl = "https://account.nanxi.li/v5/user/userinfo";
+    var accountMgrUrl = "https://account.nanxi.li";
     var cookieName = "access_token";
     var queryString = function (query) {
         var result = {};
@@ -91,16 +91,17 @@ var Oauth = (function () {
                     }
                     var userInfo = {
                         name: data.name,
-                        email:data.email
+                        email:data.email,
+                        avatar_url: data.avatar_url,
                     };
-
                     if ((data.avatar_url !== undefined) &&  ("http" !== data.avatar_url.substr(0,4))) {
-                        userinfo.avatar_url = accountMgrUrl + data.avatar_url;
+                        userInfo.avatar_url = accountMgrUrl + data.avatar_url;
                     }
                      
                     if(!userInfo.email){
                         userInfo.email = "未设置邮箱"
                     }
+                    console.log(userInfo)
                     localStorage.setItem("userinfo", JSON.stringify(userInfo));
                     window.history.pushState("", document.title, window.location.pathname);
                     updateUserInfoDoms(userInfo)
