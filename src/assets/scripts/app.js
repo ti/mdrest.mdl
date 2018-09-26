@@ -402,6 +402,9 @@ var App = (function () {
             if (url === undefined || this.data.currentUrl === url) {
                 return
             }
+            if (url == null || url === "") {
+                url = "/"
+            }
             loading.start();
             var curActive = header.querySelector("a.active");
             if (curActive) {
@@ -517,7 +520,7 @@ var App = (function () {
         } else {
             if (MdRestConfig.Html5Mode) {
                 App.routes.goto(window.location.pathname)
-            }else {
+            } else {
                 App.routes.goto("/")
             }
         }
