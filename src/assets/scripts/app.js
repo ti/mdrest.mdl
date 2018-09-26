@@ -77,12 +77,12 @@ var App = (function () {
             var docs = document.querySelector(".docs");
             if (docs) {
                 toggleToc();
-                require.require("/assets/scripts/prism.min.js", "script", function (data, e) {
+                require.require("assets/scripts/prism.min.js", "script", function (data, e) {
                     if (!e) {
                         Prism.highlightAll(true)
                     }
                 });
-                require.require("/assets/scripts/arale-qrcode.min.js", "script", function (data, e) {
+                require.require("assets/scripts/arale-qrcode.min.js", "script", function (data, e) {
                     if (!e) {
                         var actions = document.getElementById("page-actions");
                         if (actions) {
@@ -430,21 +430,15 @@ var App = (function () {
                 hideRightBottomNav()
             }
             var state = "#" + url;
-            if (MdRestConfig.Html5Mode) {
-                state = url
+            if (url === "/") {
+                state = "";
             }
+
             document.title = route.title;
             header.scrollIntoView();
-            if (MdRestConfig.Html5Mode) {
-                if (state !== window.location.pathname) {
-                    window.history.pushState(state, route.title, state);
-                    hasHistoy = true
-                }
-            } else {
-                if (state !== window.location.hash) {
-                    window.history.pushState(state, route.title, window.location.pathname + state);
-                    hasHistoy = true
-                }
+            if (state !== window.location.hash) {
+                window.history.pushState(state, route.title, window.location.pathname + state);
+                hasHistoy = true
             }
             //clear header
             require.require(route.template, "html", function (tpl, err) {
@@ -494,27 +488,23 @@ var App = (function () {
     };
 
     var toggleRoutes = function () {
-        App.routes.add("/", MdRestConfig.Title, "/assets/views/blog.html", "-child-page -mdl-blog--blogpost", Blog.getSummary);
-        App.routes.add("/pages", MdRestConfig.Title, "/assets/views/blog.html", "-child-page -mdl-blog--blogpost", Blog.getSummary);
-        App.routes.add("/page", MdRestConfig.Title, "/assets/views/page.html", "child-page mdl-blog--blogpost", Blog.getPage);
-        App.routes.add("/about", "关于", "/assets/views/about.html", "-child-page mdl-blog--blogpost", Blog.getPage);
-        App.routes.add("/tags", "标签", "/assets/views/tags.html", "-child-page mdl-blog--blogpost", Blog.getTags);
-        App.routes.add("/tag", "标签", "/assets/views/tag.html", "child-page mdl-blog--blogpost", Blog.getSummaryByTags);
-        App.routes.add("/simple", "博客", "/assets/views/simple.html", "child-page mdl-blog--blogpost");
-        App.routes.add("/catalog", "分类", "/assets/views/catalog.html", "-child-page -mdl-blog--blogpost", Blog.getSummaryByCatalog);
-        if (MdRestConfig.Html5Mode) {
-            App.routes.goto(window.location.pathname)
+        App.routes.add("/", MdRestConfig.Title, "assets/views/blog.html", "-child-page -mdl-blog--blogpost", Blog.getSummary);
+        App.routes.add("/pages", MdRestConfig.Title, "assets/views/blog.html", "-child-page -mdl-blog--blogpost", Blog.getSummary);
+        App.routes.add("/page", MdRestConfig.Title, "assets/views/page.html", "child-page mdl-blog--blogpost", Blog.getPage);
+        App.routes.add("/about", "关于", "assets/views/about.html", "-child-page mdl-blog--blogpost", Blog.getPage);
+        App.routes.add("/tags", "标签", "assets/views/tags.html", "-child-page mdl-blog--blogpost", Blog.getTags);
+        App.routes.add("/tag", "标签", "assets/views/tag.html", "child-page mdl-blog--blogpost", Blog.getSummaryByTags);
+        App.routes.add("/simple", "博客", "assets/views/simple.html", "child-page mdl-blog--blogpost");
+        App.routes.add("/catalog", "分类", "assets/views/catalog.html", "-child-page -mdl-blog--blogpost", Blog.getSummaryByCatalog);
+        if ("#/ncr" === window.location.hash) {
+            return
+        }
+        if ("#/" === window.location.hash.substr(0, 2)) {
+            App.routes.goto(decodeURI(window.location.hash).substr(1, window.location.hash.length));
+        } else if ("#!/" === window.location.hash.substr(0, 3)) {
+            App.routes.goto(decodeURI(window.location.hash).substr(2, window.location.hash.length));
         } else {
-            if ("#/ncr" === window.location.hash) {
-                return
-            }
-            if ("#/" === window.location.hash.substr(0, 2)) {
-                App.routes.goto(decodeURI(window.location.hash).substr(1, window.location.hash.length));
-            } else if ("#!/" === window.location.hash.substr(0, 3)) {
-                App.routes.goto(decodeURI(window.location.hash).substr(2, window.location.hash.length));
-            } else {
-                App.routes.goto("/")
-            }
+            App.routes.goto("/")
         }
         main.toggleInternalLink();
     };
