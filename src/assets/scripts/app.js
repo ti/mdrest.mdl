@@ -470,7 +470,7 @@ var App = (function () {
                                 App.id = data.location;
                             }
                             if (data.title) {
-                                document.title = route.title + " - " + data.title
+                                document.title = data.title
                             }
                             content.innerHTML = Mustache.render(tpl, data);
                             content.updateDomActions();
