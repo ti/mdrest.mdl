@@ -10,11 +10,11 @@ var App = (function () {
 
     var getBaseUrl = function () {
         var url = window.location.pathname;
-        if((url.lastIndexOf("/index.html")>=0) || (url.lastIndexOf("/index.htm")>=0)){
+        if ((url.lastIndexOf("/index.html") >= 0) || (url.lastIndexOf("/index.htm") >= 0)) {
             url = url.substring(0, url.lastIndexOf("/"));
         }
-        if(url.substr(url.length-1,url.length)==="/") {
-            url = url.substr(0, url.length-1)
+        if (url.substr(url.length - 1, url.length) === "/") {
+            url = url.substr(0, url.length - 1)
         }
         return url;
     };
@@ -26,13 +26,13 @@ var App = (function () {
             loading.isDone = true;
             loading.dom.style.display = "none";
         },
-        start:function () {
+        start: function () {
             loading.isDone = false;
             setTimeout(function () {
-                if(!loading.isDone){
+                if (!loading.isDone) {
                     loading.dom.style.display = "block";
                 }
-            },1200);
+            }, 1200);
         }
     };
 
@@ -41,28 +41,28 @@ var App = (function () {
     };
     var baseActions = function () {
         HTMLDivElement.prototype.toggleInternalLink = function () {
-            var anchors =  this.querySelectorAll('a');
+            var anchors = this.querySelectorAll('a');
             for (var i = 0; i < anchors.length; i++) {
                 anchors[i].onclick = function (e) {
                     var href = this.getAttribute("href");
-                    if(href.indexOf('#')===0) {
+                    if (href.indexOf('#') === 0) {
                         e.preventDefault();
                         scrollIntoViewSmoothly(document.querySelector(href));
-                    } else  if (href.substr(-3)===".md" && href.substring(0, 4) !== "http") {
+                    } else if (href.substr(-3) === ".md" && href.substring(0, 4) !== "http") {
                         e.preventDefault();
-                        if (MdRestConfig.BasePath){
-                            href  = href.substring(MdRestConfig.BasePath.length, href.length-3);
+                        if (MdRestConfig.BasePath) {
+                            href = href.substring(MdRestConfig.BasePath.length, href.length - 3);
                         }
                         App.routes.goto("/page/" + href);
                     }
                 };
             }
-            anchors =  this.querySelectorAll('div[data-link], li[data-link], a[data-link]');
+            anchors = this.querySelectorAll('div[data-link], li[data-link], a[data-link]');
             for (var i = 0; i < anchors.length; i++) {
                 anchors[i].onclick = function (e) {
                     var href = this.getAttribute("href");
                     e.preventDefault();
-                    if (href.indexOf('://')>0  || href.indexOf('#')>0 ||  this.getAttribute('target') === "_blank"){
+                    if (href.indexOf('://') > 0 || href.indexOf('#') > 0 || this.getAttribute('target') === "_blank") {
                         link.href = href;
                         link.click();
                         return true;
@@ -75,44 +75,44 @@ var App = (function () {
             this.toggleInternalLink();
             componentHandler.upgradeAllRegistered();
             var docs = document.querySelector(".docs");
-            if(docs) {
+            if (docs) {
                 toggleToc();
-                require.require("assets/scripts/prism.min.js","script",function (data, e) {
-                    if(!e){
+                require.require("assets/scripts/prism.min.js", "script", function (data, e) {
+                    if (!e) {
                         Prism.highlightAll(true)
                     }
                 });
-                require.require("assets/scripts/arale-qrcode.min.js","script",function (data, e) {
-                    if(!e){
+                require.require("assets/scripts/arale-qrcode.min.js", "script", function (data, e) {
+                    if (!e) {
                         var actions = document.getElementById("page-actions");
-                        if(actions){
+                        if (actions) {
                             var pageQrcode = actions.querySelector(".action__qrcode");
-                            var el = new AraleQRCode({correctLevel: 0,size: 200,text: window.location.href});
+                            var el = new AraleQRCode({correctLevel: 0, size: 200, text: window.location.href});
                             pageQrcode.innerHTML = "";
                             pageQrcode.appendChild(el);
                         }
                     }
                 });
                 var comments = document.getElementById("comments");
-                if(comments && undefined !== window.MdRestDisqus){
-                    MdRestDisqus.loadTo(comments,App.url, App.id, true);
+                if (comments && undefined !== window.MdRestDisqus) {
+                    MdRestDisqus.loadTo(comments, App.url, App.id, true);
                 }
             }
         };
         document.getElementById("back-button").onclick = function () {
-            if(hasHistoy){
+            if (hasHistoy) {
                 window.history.back();
             } else {
                 App.routes.goto("/")
             }
         };
         document.querySelector(".drawer").onclick = function () {
-            if(drawerToggle.checked){
+            if (drawerToggle.checked) {
                 drawerToggle.checked = false;
             }
         };
-        window.onhashchange = function() {
-            if(!window.location.hash.indexOf("#/")) {
+        window.onhashchange = function () {
+            if (!window.location.hash.indexOf("#/")) {
                 App.routes.goto(decodeURI(window.location.hash).substr(1, window.location.hash.length));
             } else {
                 App.routes.goto("/");
@@ -121,10 +121,10 @@ var App = (function () {
 
     };
     var nameColors = {
-        data:{},
+        data: {},
         get: function (name) {
-            var color =  this.data[name];
-            if (color){
+            var color = this.data[name];
+            if (color) {
                 return color;
             }
 
@@ -132,14 +132,28 @@ var App = (function () {
             for (var i = 0; i < name.length; i++) {
                 num += name.charCodeAt(i);
             }
-            color =  "hsl(" + (num % 360) + ",60%,75%)";
+            color = "hsl(" + (num % 360) + ",60%,75%)";
             this.data[name] = color;
             return color;
         }
     };
-    var toggleRightBottomNav = function() {
+
+    var hideRightBottomNav = function () {
         var rightBottomNav = document.getElementById("right-bottom-nav");
-        if (!rightBottomNav){
+        if (rightBottomNav) {
+            rightBottomNav.classList.add("hidden");
+        }
+    }
+    var showRightBottomNav = function () {
+        var rightBottomNav = document.getElementById("right-bottom-nav");
+        if (rightBottomNav) {
+            rightBottomNav.classList.remove("hidden");
+        }
+    }
+
+    var toggleRightBottomNav = function () {
+        var rightBottomNav = document.getElementById("right-bottom-nav");
+        if (!rightBottomNav) {
             return
         }
         // rightBottomNav float above footer
@@ -199,8 +213,8 @@ var App = (function () {
 
     var activeTocIndex = -1;
     var toggleToc = function () {
-        var tocMenu =  document.getElementById("toc-menu");
-        if(!tocMenu){
+        var tocMenu = document.getElementById("toc-menu");
+        if (!tocMenu) {
             return
         }
         var docs = document.querySelector(".docs");
@@ -214,7 +228,7 @@ var App = (function () {
             tocMenu.classList.remove("hidden");
             var navElements = document.querySelectorAll(".docs-toc a");
             for (var i = 0, l = navElements.length; i < l; i++) {
-                navElements[i].addEventListener('click', function(e) {
+                navElements[i].addEventListener('click', function (e) {
                     e.preventDefault();
                     var curActives = tocContainer.querySelectorAll("a.active");
                     if (curActives) {
@@ -231,8 +245,8 @@ var App = (function () {
 
             window.addEventListener('scroll', function (e) {
                 var docsTop = docs.getBoundingClientRect().top;
-                if( docsTop >= 0) {
-                    if(activeTocIndex !== -1){
+                if (docsTop >= 0) {
+                    if (activeTocIndex !== -1) {
                         activeTocIndex = -1;
                         var curActive = tocContainer.querySelector("a.active");
                         if (curActive) {
@@ -246,16 +260,16 @@ var App = (function () {
                     var hElements = document.querySelectorAll(".docs h2, .docs h3");
                     for (var i = 0, l = hElements.length; i < l; i++) {
                         var id = hElements[i].getAttribute("id");
-                        if(id) {
+                        if (id) {
                             hElementsTops.push({
-                                id : id,
-                                top:hElements[i].offsetTop - hElements[i].parentNode.offsetTop - 16,
+                                id: id,
+                                top: hElements[i].offsetTop - hElements[i].parentNode.offsetTop - 16,
                             });
                         }
                     }
                 }
                 var currentIndex = -1;
-                for(var i=0,l = hElementsTops.length;i<l;i++){
+                for (var i = 0, l = hElementsTops.length; i < l; i++) {
                     if ((0 - docsTop) >= hElementsTops[i].top) {
                         currentIndex = i;
                         continue;
@@ -278,28 +292,28 @@ var App = (function () {
     var require = {
         data: {},
         headEl: document.getElementsByTagName('head')[0],
-        sync:true,
+        sync: true,
         reset: function (url) {
             require.data = {}
         },
         put: function (key, value) {
             require.data[key] = value;
         },
-        require:function (url,type, callback) {
+        require: function (url, type, callback) {
             //如果正在载入，return
-            if("link" === type || "script" === type){
+            if ("link" === type || "script" === type) {
                 var status = require.data[url];
-                if(undefined != status){
-                    if(200 ===status){
+                if (undefined != status) {
+                    if (200 === status) {
                         return callback();
                     } else {
-                        return callback({}, {status:status});
+                        return callback({}, {status: status});
                     }
                 }
-                var el = document.createElement(type),sync = false,
-                    attrName,attributes;
+                var el = document.createElement(type), sync = false,
+                    attrName, attributes;
 
-                if("link" === type){
+                if ("link" === type) {
                     sync = true;
                     attributes = {rel: 'stylesheet', href: url, type: 'text/css'}
                 } else {
@@ -308,23 +322,23 @@ var App = (function () {
                 for (attrName in attributes) {
                     el.setAttribute(attrName, attributes[attrName]);
                 }
-                if(callback){
+                if (callback) {
                     require.data[url] = 100;
                     el.addEventListener('load', function (e) {
                         require.data[url] = 200;
                         callback(e);
                     }, false);
                     setTimeout(function () {
-                        if(200 !==require.data[url]){
+                        if (200 !== require.data[url]) {
                             require.data[url] = 408;
-                            callback({}, {status:408});
+                            callback({}, {status: 408});
                         }
-                    },3000)
+                    }, 3000)
                 } else {
                     require.data[url] = 200;
                 }
 
-                if (sync){
+                if (sync) {
                     require.headEl.appendChild(el);
                 } else {
                     var s = document.getElementsByTagName(type)[0];
@@ -333,25 +347,25 @@ var App = (function () {
                 return;
             }
             var resp = require.data[url];
-            if (resp){
+            if (resp) {
                 callback(resp);
                 return
             }
             var req = new XMLHttpRequest();
             req.open("GET", url, true);
-            req.onreadystatechange = function() {
+            req.onreadystatechange = function () {
                 if (req.readyState === 4) {
                     var data = null;
                     if (req.status === 200) {
-                        if (type === "json"){
+                        if (type === "json") {
                             resp = JSON.parse(req.responseText);
                         } else {
                             resp = req.responseText;
                         }
-                        require.data[url]=resp;
+                        require.data[url] = resp;
                         callback(resp);
                     } else {
-                        callback(resp, {status:req.status});
+                        callback(resp, {status: req.status});
                     }
                 }
             };
@@ -361,7 +375,7 @@ var App = (function () {
 
     var routes = {
         data: {
-            "_error":'<div class="error"><i class="material-icons">info</i><h3>{{status}}</h3><p>{{msg}}</p></div>'
+            "_error": '<div class="error"><i class="material-icons">info</i><h3>{{status}}</h3><p>{{msg}}</p></div>'
         },
         remove: function (url) {
             delete this.data[url];
@@ -374,9 +388,9 @@ var App = (function () {
         },
         add: function (url, title, templateUrl, mainCss, dataFunc) {
             var tmpData = {
-                title : title,
-                template:templateUrl,
-                dataFunc:dataFunc
+                title: title,
+                template: templateUrl,
+                dataFunc: dataFunc
             };
             if (mainCss) {
                 tmpData.mainCss = mainCss.split(" ")
@@ -385,7 +399,7 @@ var App = (function () {
 
         },
         goto: function (url) {
-            if(url === undefined || this.data.currentUrl === url){
+            if (url === undefined || this.data.currentUrl === url) {
                 return
             }
             loading.start();
@@ -394,9 +408,9 @@ var App = (function () {
                 curActive.classList.remove("active")
             }
             var headerActive = url;
-            if("/catalog/projects" === url.substring(0,17)) {
+            if ("/catalog/projects" === url.substring(0, 17)) {
                 headerActive = "/catalog/projects"
-            } else if ("/pages" === url.substring(0,6)){
+            } else if ("/pages" === url.substring(0, 6)) {
                 headerActive = "/"
             }
             curActive = header.querySelector('a[href="' + headerActive + '"]');
@@ -404,64 +418,69 @@ var App = (function () {
                 curActive.classList.add("active")
             }
 
-            var urlBase = "/" + url.split("/",2)[1];
-            if (!this.exist(urlBase)){
-                content.innerHTML = Mustache.render(routes.data["_error"], {status:404,msg: "页面 " + url + " 不存在"});
+            var urlBase = "/" + url.split("/", 2)[1];
+            if (!this.exist(urlBase)) {
+                content.innerHTML = Mustache.render(routes.data["_error"], {status: 404, msg: "页面 " + url + " 不存在"});
                 return
             }
             var route = this.get(urlBase);
-            var state =  "#" + url;
+            if (url.startsWith('/page/')) {
+                showRightBottomNav()
+            } else {
+                hideRightBottomNav()
+            }
+            var state = "#" + url;
             if (url === "/") {
                 state = "";
             }
+
             document.title = route.title;
             header.scrollIntoView();
             if (state !== window.location.hash) {
-                window.history.pushState(state,route.title, window.location.pathname + state);
+                window.history.pushState(state, route.title, window.location.pathname + state);
                 hasHistoy = true
             }
             //clear header
-            require.require(route.template,"html",function (tpl,err) {
-               if(err) {
-                   loading.done();
-                   content.innerHTML = Mustache.render(routes.data["_error"], {status:500,msg:"页面载入错误"});
-                   return
-               }
+            require.require(route.template, "html", function (tpl, err) {
+                if (err) {
+                    loading.done();
+                    content.innerHTML = Mustache.render(routes.data["_error"], {status: 500, msg: "页面载入错误"});
+                    return
+                }
                 routes.data.currentUrl = url;
-               if(route.mainCss) {
-                   for(var i=0,l = route.mainCss.length;i<l;i++) {
-                       var mainCss = route.mainCss[i];
-                       if(mainCss.substring(0, 1) === "-"){
-                           main.classList.remove(mainCss.substring(1, mainCss.length))
-                       }else {
-                           main.classList.add(mainCss)
-                       }
-                   }
-               }
+                if (route.mainCss) {
+                    for (var i = 0, l = route.mainCss.length; i < l; i++) {
+                        var mainCss = route.mainCss[i];
+                        if (mainCss.substring(0, 1) === "-") {
+                            main.classList.remove(mainCss.substring(1, mainCss.length))
+                        } else {
+                            main.classList.add(mainCss)
+                        }
+                    }
+                }
                 App.url = url;
                 App.id = url;
-                if(route.dataFunc){
-                   route.dataFunc(url, function (data, err) {
-                       loading.done();
-                       if (err){
-                           content.innerHTML = Mustache.render(routes.data["_error"],err);
-                       } else {
-                           if(data.location){
-                               App.id = data.location;
-                           }
-                           if(data.title){
-                               document.title = route.title + " - " + data.title
-                           }
-                           content.innerHTML = Mustache.render(tpl,data);
-                           content.updateDomActions();
-                       }
-                   })
-               } else {
-                   loading.done();
-                   content.innerHTML = Mustache.render(tpl);
-                   content.updateDomActions();
-
-               }
+                if (route.dataFunc) {
+                    route.dataFunc(url, function (data, err) {
+                        loading.done();
+                        if (err) {
+                            content.innerHTML = Mustache.render(routes.data["_error"], err);
+                        } else {
+                            if (data.location) {
+                                App.id = data.location;
+                            }
+                            if (data.title) {
+                                document.title = route.title + " - " + data.title
+                            }
+                            content.innerHTML = Mustache.render(tpl, data);
+                            content.updateDomActions();
+                        }
+                    })
+                } else {
+                    loading.done();
+                    content.innerHTML = Mustache.render(tpl);
+                    content.updateDomActions();
+                }
             })
 
 
@@ -469,23 +488,23 @@ var App = (function () {
     };
 
     var toggleRoutes = function () {
-        App.routes.add("/",MdRestConfig.Title,"assets/views/blog.html","-child-page -mdl-blog--blogpost",Blog.getSummary);
-        App.routes.add("/pages",MdRestConfig.Title,"assets/views/blog.html","-child-page -mdl-blog--blogpost",Blog.getSummary);
-        App.routes.add("/page",MdRestConfig.Title,"assets/views/page.html","child-page mdl-blog--blogpost",Blog.getPage);
-        App.routes.add("/about","关于","assets/views/about.html","-child-page mdl-blog--blogpost",Blog.getPage);
-        App.routes.add("/tags","标签","assets/views/tags.html","-child-page mdl-blog--blogpost", Blog.getTags);
-        App.routes.add("/tag","标签","assets/views/tag.html","child-page mdl-blog--blogpost", Blog.getSummaryByTags);
-        App.routes.add("/simple","博客","assets/views/simple.html","child-page mdl-blog--blogpost");
-        App.routes.add("/catalog","分类","assets/views/catalog.html","-child-page -mdl-blog--blogpost",Blog.getSummaryByCatalog);
-        if("#/ncr" === window.location.hash){
+        App.routes.add("/", MdRestConfig.Title, "assets/views/blog.html", "-child-page -mdl-blog--blogpost", Blog.getSummary);
+        App.routes.add("/pages", MdRestConfig.Title, "assets/views/blog.html", "-child-page -mdl-blog--blogpost", Blog.getSummary);
+        App.routes.add("/page", MdRestConfig.Title, "assets/views/page.html", "child-page mdl-blog--blogpost", Blog.getPage);
+        App.routes.add("/about", "关于", "assets/views/about.html", "-child-page mdl-blog--blogpost", Blog.getPage);
+        App.routes.add("/tags", "标签", "assets/views/tags.html", "-child-page mdl-blog--blogpost", Blog.getTags);
+        App.routes.add("/tag", "标签", "assets/views/tag.html", "child-page mdl-blog--blogpost", Blog.getSummaryByTags);
+        App.routes.add("/simple", "博客", "assets/views/simple.html", "child-page mdl-blog--blogpost");
+        App.routes.add("/catalog", "分类", "assets/views/catalog.html", "-child-page -mdl-blog--blogpost", Blog.getSummaryByCatalog);
+        if ("#/ncr" === window.location.hash) {
             return
         }
-        if ("#/" === window.location.hash.substr(0,2)) {
-           App.routes.goto(decodeURI(window.location.hash).substr(1, window.location.hash.length));
-        }else if ("#!/" === window.location.hash.substr(0,3)) {
+        if ("#/" === window.location.hash.substr(0, 2)) {
+            App.routes.goto(decodeURI(window.location.hash).substr(1, window.location.hash.length));
+        } else if ("#!/" === window.location.hash.substr(0, 3)) {
             App.routes.goto(decodeURI(window.location.hash).substr(2, window.location.hash.length));
         } else {
-           App.routes.goto("/")
+            App.routes.goto("/")
         }
         main.toggleInternalLink();
     };
@@ -498,15 +517,15 @@ var App = (function () {
 
     return {
         init: init,
-        require:require,
-        routes:routes,
-        nameColors:nameColors,
+        require: require,
+        routes: routes,
+        nameColors: nameColors,
         baseUrl: getBaseUrl()
     };
 })();
 
 
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
     App.init();
 });
 
