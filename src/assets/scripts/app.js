@@ -473,6 +473,7 @@ var App = (function () {
                                 document.title = data.title
                             }
                             content.innerHTML = Mustache.render(tpl, data);
+                            console.log("xxx11", content.innerHTML);
                             content.updateDomActions();
                         }
                     })
@@ -481,9 +482,10 @@ var App = (function () {
                     content.innerHTML = Mustache.render(tpl);
                     content.updateDomActions();
                 }
+                setTimeout(function () {
+                    Blog.initCodeTabs(content);
+                }, 1000);
             })
-
-
         }
     };
 

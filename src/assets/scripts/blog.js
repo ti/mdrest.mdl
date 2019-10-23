@@ -1,5 +1,21 @@
 'use strict';
 var Blog = (function () {
+    var initCodeTabs = function (docs) {
+        docs.querySelectorAll("div.tabs input[type='radio']").forEach(function (element) {
+            element.onchange = function (e) {
+                var trackName = this.getAttribute("track-name");
+                var id = this.id;
+                if (this.checked && trackName) {
+                    var selector = "div.tabs input[track-name='" +  trackName + "']";
+                    docs.querySelectorAll(selector).forEach(function (e) {
+                        if (e.id !== id) {
+                            e.checked = true
+                        }
+                    });
+                }
+            }
+        });
+    };
     var getSummary = function (url, callback) {
         App.require.require(MdRestConfig.BasePath + "mdrest_index.json", "json", function (resp, err) {
             if (err) {
@@ -313,7 +329,8 @@ var Blog = (function () {
         getSummaryByTags: getSummaryByTags,
         getSummaryByCatalog: getSummaryByCatalog,
         getTags: getTags,
-        getPage: getPage
+        getPage: getPage,
+        initCodeTabs: initCodeTabs
     };
 })();
 
