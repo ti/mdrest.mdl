@@ -6670,6 +6670,7 @@ h6 {
     z-index: 1;
     font-weight: bold;
     white-space: nowrap;
+    user-select: none;
     font-size: 14px; }
     .tabs > label:first-of-type {
       margin-left: 0; }

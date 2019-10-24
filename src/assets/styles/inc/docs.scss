@@ -120,6 +120,7 @@ h6 {
     font-weight: bold;
     white-space: nowrap;
     font-size: 14px;
+    user-select: none;
     &:first-of-type {
       margin-left: 0;
     }
