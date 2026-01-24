@@ -1,6 +1,6 @@
 'use strict';
 var Oauth = (function () {
-    var clientId = "9527";
+    var clientId = "hb42UjlA-mgb9XExUViQAA";
     var authorizeUrl = "https://account.nx.run/web/page/oauth/";
     var userInfoUrl = "https://account.nx.run/auth/v1/user/me";
     var accountMgrUrl = "https://account.nx.run";
