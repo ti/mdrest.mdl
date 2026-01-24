@@ -38,7 +38,7 @@ var Oauth = (function () {
     function logout() {
         localStorage.removeItem("userinfo");
         localStorage.removeItem("token");
-        window.location.replace(accountMgrUrl+ "/v5/oauth/logout?redirect_uri=" + encodeURI(window.location.href))
+        window.location.replace(accountMgrUrl+ "/web/page/oauth/#sign_out=true&redirect_uri=" + encodeURI(window.location.href))
     }
 
     function updateUserInfoDoms(userinfo) {
@@ -50,8 +50,8 @@ var Oauth = (function () {
                 email.classList.remove("hidden")
             }
             element.querySelectorAll(".avatar").forEach(function (avatar) {
-                if(userinfo.avatar_url) {
-                    avatar.style.backgroundImage = "url("+ userinfo.avatar_url + ")"
+                if(userinfo.picture) {
+                    avatar.style.backgroundImage = "url("+ userinfo.picture + ")"
                 }else {
                     avatar.style.backgroundColor = App.nameColors.get(userinfo.name)
                     avatar.innerText = userinfo.name.substr(0,1)
@@ -92,12 +92,12 @@ var Oauth = (function () {
                     var userInfo = {
                         name: data.name,
                         email:data.email,
-                        avatar_url: data.avatar_url,
+                        picture: data.picture,
                     };
-                    if ((data.avatar_url !== undefined) &&  ("http" !== data.avatar_url.substr(0,4))) {
-                        userInfo.avatar_url = accountMgrUrl + data.avatar_url;
+                    if ((data.picture !== undefined) &&  ("http" !== data.picture.substr(0,4))) {
+                        userInfo.picture = accountMgrUrl + data.picture;
                     }
-                     
+
                     if(!userInfo.email){
                         userInfo.email = "未设置邮箱"
                     }
@@ -137,4 +137,3 @@ var Oauth = (function () {
 })();
 
 Oauth.init();
-

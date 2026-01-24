@@ -1,5 +1,6 @@
 .DS_STORE
 ._*
+dist
 tmp
 *.iml
 package-lock.json
