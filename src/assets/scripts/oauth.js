@@ -27,7 +27,7 @@ var Oauth = (function () {
 
     function login() {
        var state = Math.random().toString(36).substr(2).toLowerCase();
-       var url = authorizeUrl + "?response_type=token&scope=userinfo%20userinfo:email&" + "&client_id=" + clientId + "&state=" + state  + "&redirect_uri=" + encodeURI(window.location.href)
+       var url = authorizeUrl + "?response_type=token&scope=profile%20email&" + "&client_id=" + clientId + "&state=" + state  + "&redirect_uri=" + encodeURI(window.location.href)
         window.location.href = url;
     }
 
