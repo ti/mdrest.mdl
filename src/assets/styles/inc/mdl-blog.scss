@@ -71,13 +71,13 @@
   }
   .mdl-card {
     &.something-else .mdl-card__media {
-      background-image: url("../images/avatar.png");
+      background-image: url("../../images/avatar.png");
     }
     display: flex;
     flex-direction: column;
     align-items: stretch;
     min-height: 360px;
-  }
+    }
   .mdl-card__title {
     padding: 16px;
     flex-grow: 1;
@@ -236,7 +236,7 @@
   .mdl-blog {
     .mdl-card {
       &.something-else .mdl-card__media {
-        background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url("../images/background.jpg");
+        background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url("../../images/background.jpg");
       }
       margin: 0;
       width: 100%;
@@ -298,6 +298,7 @@
     align-items: center;
   }
 }
+
 
 .profile-card {
   .mdl-card__media {
@@ -439,6 +440,9 @@
   }
 }
 
-/* Workaround for Firefox.
- * User agent stylesheet kept overwriting the font in FF only.
- */
+.mdl-button--icon {
+  &:hover {
+    background: rgba(0, 122, 255, 0.15);
+    transform: scale(1.1);
+  }
+}

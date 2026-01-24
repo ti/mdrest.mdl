@@ -1,9 +1,9 @@
 'use strict';
 var Oauth = (function () {
     var clientId = "9527";
-    var authorizeUrl = "https://account.nanxi.li/v5/oauth/authorize";
-    var userInfoUrl = "https://account.nanxi.li/v5/user/userinfo";
-    var accountMgrUrl = "https://account.nanxi.li";
+    var authorizeUrl = "https://account.nx.run/web/page/oauth/";
+    var userInfoUrl = "https://account.nx.run/auth/v1/user/me";
+    var accountMgrUrl = "https://account.nx.run";
     var cookieName = "access_token";
     var queryString = function (query) {
         var result = {};

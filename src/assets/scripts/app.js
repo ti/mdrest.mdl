@@ -82,6 +82,11 @@ var App = (function () {
                         Prism.highlightAll(true)
                     }
                 });
+                require.require("assets/scripts/mermaid.min.js", "script", function (data, e) {
+                    if (!e) {
+                        initMermaid();
+                    }
+                });
                 require.require("assets/scripts/arale-qrcode.min.js", "script", function (data, e) {
                     if (!e) {
                         var actions = document.getElementById("page-actions");
@@ -526,6 +531,67 @@ var App = (function () {
     };
 })();
 
+/**
+ * Initialize Mermaid diagrams
+ * Handles class="  language-mermaid" (with spaces) bug
+ */
+function initMermaid() {
+    // Find all code blocks with mermaid language class (handles spaces)
+    var mermaidBlocks = document.querySelectorAll('pre[class*="language-mermaid"] code');
+    
+    if (mermaidBlocks.length === 0) {
+        return;
+    }
+    
+    mermaidBlocks.forEach(function(codeElement) {
+        var preElement = codeElement.parentElement;
+        var mermaidCode = codeElement.textContent;
+        
+        // Create new mermaid div
+        var mermaidDiv = document.createElement('div');
+        mermaidDiv.className = 'mermaid';
+        mermaidDiv.textContent = mermaidCode;
+        
+        // Replace pre element with mermaid div
+        preElement.parentNode.replaceChild(mermaidDiv, preElement);
+    });
+    
+    // Initialize Mermaid with Apple-style theme
+    mermaid.initialize({
+        startOnLoad: false,
+        theme: 'default',
+        themeVariables: {
+            primaryColor: '#007AFF',      // iOS blue
+            primaryTextColor: '#000',
+            primaryBorderColor: '#007AFF',
+            lineColor: '#007AFF',
+            secondaryColor: '#5856D6',    // iOS purple
+            tertiaryColor: '#FF2D55',     // iOS red
+            background: '#f8fafc',
+            mainBkg: '#f8fafc',
+            secondBkg: '#e0f2fe',
+            fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif'
+        },
+        flowchart: {
+            useMaxWidth: true,
+            htmlLabels: true,
+            curve: 'basis'
+        },
+        sequence: {
+            useMaxWidth: true,
+            actorMargin: 80,
+            noteMargin: 15,
+            messageFontSize: 14
+        }
+    });
+    
+    // Run Mermaid rendering
+    mermaid.run({
+        querySelector: '.mermaid'
+    }).catch(function(error) {
+        console.error('Mermaid rendering error:', error);
+    });
+}
 
 document.addEventListener("DOMContentLoaded", function () {
     App.init();

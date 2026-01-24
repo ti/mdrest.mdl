@@ -11,6 +11,8 @@ p {
 }
 
 
+
+
 /**
 * Styles for HTML elements
 */
@@ -44,6 +46,24 @@ ul, ol {
   margin: 0;
   padding: 0;
 }
+
+.docs .mermaid,
+.docs pre.mermaid,
+.docs div.mermaid {
+  text-align: center;
+  svg {
+    max-width: 100%;
+    height: auto;
+  }
+}
+
+pre[class*="language-mermaid"] {
+  &::before {
+    display: none !important;
+  }
+  background: transparent !important;
+}
+
 
 h1, h2, h3, h4, h5, h6 {
   position: relative;
