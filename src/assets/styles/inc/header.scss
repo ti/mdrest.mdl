@@ -104,9 +104,14 @@
 
 
 /** draw**/
-
 .trans-drawer {
   display: none;
+}
+
+.mdl-layout__drawer {
+    background: #ffffffcc;
+    backdrop-filter: blur(20px) saturate(180%);
+    border: none;
 }
 
 .mdl-layout__drawer .mdl-navigation {
